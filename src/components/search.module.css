@@ -1,0 +1,9 @@
+.searchBox {
+  display: flex;
+  max-width: 100%;
+  justify-content: space-between;
+}
+
+.searchInput {
+  flex: 1;
+}
