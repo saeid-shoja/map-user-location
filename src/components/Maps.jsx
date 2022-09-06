@@ -1,5 +1,5 @@
-import React from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import React, { useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import style from "./maps.module.css";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -12,18 +12,50 @@ const positionIcon = L.icon({
 
 const position = [51.505, -0.09];
 
-function Maps() {
+const ResetMapCenter = ({ selectedLocation }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (selectedLocation) {
+      map.setView(
+        L.latLng(selectedLocation?.lat, selectedLocation?.lon),
+        map.getZoom(),
+        {
+          animate: true,
+        }
+      );
+    }
+  }, [selectedLocation, map]);
+
+  return null;
+};
+
+function Maps({ selectedLocation }) {
+  let selectedLocationCoordinates = [
+    +selectedLocation?.lat,
+    +selectedLocation?.lon,
+  ];
+
+  console.log("selectedLocationCoordinates :>> ", selectedLocationCoordinates);
   return (
-    <MapContainer className={style.mapContainer} center={position} zoom={13}>
+    <MapContainer
+      className={style.mapContainer}
+      center={selectedLocation ? selectedLocationCoordinates : position}
+      zoom={13}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=kkQgkyPmxq3ZkwAZICOv"
       />
-      <Marker position={position} icon={positionIcon}>
+      <Marker
+        position={selectedLocation ? selectedLocationCoordinates : position}
+        icon={positionIcon}
+      >
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
+      <ResetMapCenter selectedLocation={selectedLocation} />
     </MapContainer>
   );
 }

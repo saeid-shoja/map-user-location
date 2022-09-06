@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Maps from "./components/Maps";
 import SearchInput from "./components/SearchInput";
 
 function App() {
+  const [selectedLocation, setSelectedLocation] = useState();
+
   return (
     <div className="App">
       <div className="mapWrapper">
-        <Maps />
+        <Maps selectedLocation={selectedLocation} />
       </div>
       <div className="searchWrapper">
-        <SearchInput />
+        <SearchInput
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+        />
       </div>
     </div>
   );
