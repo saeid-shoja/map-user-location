@@ -10,8 +10,6 @@ const positionIcon = L.icon({
   iconSize: [30, 40],
 });
 
-const position = [51.505, -0.09];
-
 const ResetMapCenter = ({ selectedLocation }) => {
   const map = useMap();
 
@@ -25,7 +23,7 @@ const ResetMapCenter = ({ selectedLocation }) => {
         }
       );
     }
-  }, [selectedLocation, map]);
+  }, [map, selectedLocation]);
 
   return null;
 };
@@ -36,10 +34,12 @@ function Maps({ selectedLocation }) {
     +selectedLocation?.lon,
   ];
 
+  const position = [51.505, -0.09];
+
   return (
     <MapContainer
       className={style.mapContainer}
-      center={selectedLocation ? selectedLocationCoordinates : position}
+      center={[51.505, -0.09]}
       zoom={130}
     >
       <TileLayer
@@ -47,12 +47,15 @@ function Maps({ selectedLocation }) {
         url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=kkQgkyPmxq3ZkwAZICOv"
       />
       <Marker
-        position={selectedLocation ? selectedLocationCoordinates : position}
+        position={selectedLocation.lat ? selectedLocationCoordinates : position}
         icon={positionIcon}
       >
         <Popup>Here is a beautiful place</Popup>
       </Marker>
-      <ResetMapCenter selectedLocation={selectedLocation} />
+
+      {selectedLocation.lat && (
+        <ResetMapCenter selectedLocation={selectedLocation} />
+      )}
     </MapContainer>
   );
 }
