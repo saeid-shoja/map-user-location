@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import style from "./maps.module.css";
+import style from "./styles/maps.module.css";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import icon from "../assets/gps.png";
@@ -36,12 +36,11 @@ function Maps({ selectedLocation }) {
     +selectedLocation?.lon,
   ];
 
-  console.log("selectedLocationCoordinates :>> ", selectedLocationCoordinates);
   return (
     <MapContainer
       className={style.mapContainer}
       center={selectedLocation ? selectedLocationCoordinates : position}
-      zoom={13}
+      zoom={130}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -51,9 +50,7 @@ function Maps({ selectedLocation }) {
         position={selectedLocation ? selectedLocationCoordinates : position}
         icon={positionIcon}
       >
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
+        <Popup>Here is a beautiful place</Popup>
       </Marker>
       <ResetMapCenter selectedLocation={selectedLocation} />
     </MapContainer>

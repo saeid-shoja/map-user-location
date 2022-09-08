@@ -4,7 +4,7 @@ import Maps from "./components/Maps";
 import SearchInput from "./components/SearchInput";
 
 function App() {
-  const [selectedLocation, setSelectedLocation] = useState();
+  const [selectedLocation, setSelectedLocation] = useState([]);
 
   return (
     <div className="App">

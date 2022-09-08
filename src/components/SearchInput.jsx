@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from "./search.module.css";
+import style from "./styles/search.module.css";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -52,6 +52,8 @@ const SearchInput = ({ setSelectedLocation }) => {
         setIsLoading(false);
         console.log({ err: err });
       });
+
+    setSearchLocation("");
   };
 
   return (
@@ -62,6 +64,7 @@ const SearchInput = ({ setSelectedLocation }) => {
             className={style.searchInput}
             value={searchLocation}
             onChange={(e) => handleSearchLocation(e)}
+            placeholder="Write your intended location"
           />
         </div>
         <div className={style.searchButton}>
@@ -72,17 +75,21 @@ const SearchInput = ({ setSelectedLocation }) => {
       </div>
       <div>
         {isLoading ? (
-          <CircularProgress style={{ margin: "40% 40%" }} />
+          <CircularProgress
+            data-testId="loading-spinner"
+            style={{ margin: "40% 40%" }}
+          />
         ) : (
           <List>
-            {locationList.map((location) => {
+            {locationList?.map((location) => {
               return (
-                <div key={location?.place_id}>
+                <div data-testId="list-item-wrapper" key={location?.place_id}>
                   <ListItem
                     button
                     onClick={() => {
                       setSelectedLocation(location);
                     }}
+                    data-testId="list-item"
                   >
                     <ListItemIcon>
                       <MyLocationIcon />
