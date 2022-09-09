@@ -43,7 +43,7 @@ function Maps({ selectedLocation }) {
     <MapContainer
       className={style.mapContainer}
       center={[51.505, -0.09]}
-      zoom={100}
+      zoom={150}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
