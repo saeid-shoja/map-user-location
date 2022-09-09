@@ -76,20 +76,20 @@ const SearchInput = ({ setSelectedLocation }) => {
       <div>
         {isLoading ? (
           <CircularProgress
-            data-testId="loading-spinner"
+            data-testid="loading-spinner"
             style={{ margin: "40% 40%" }}
           />
         ) : (
           <List>
             {locationList?.map((location) => {
               return (
-                <div data-testId="list-item-wrapper" key={location?.place_id}>
+                <div data-testid="list-item-wrapper" key={location?.place_id}>
                   <ListItem
                     button
                     onClick={() => {
                       setSelectedLocation(location);
                     }}
-                    data-testId="list-item"
+                    data-testid="list-item"
                   >
                     <ListItemIcon>
                       <MyLocationIcon />

@@ -42,10 +42,12 @@ describe("SearchInput", () => {
       const inputElement = screen.getByPlaceholderText(
         "Write your intended location"
       );
-      fireEvent.change(inputElement, { target: { value: /lon/i } });
+      fireEvent.change(inputElement, { target: { value: "lon" } });
       fireEvent.click(searchButton);
-      const listItemElement = await screen.findAllByTestId("list-item-wrapper");
-      expect(listItemElement.length).not.toBe(0);
+      const listItemElements = screen.queryAllByTestId("list-item");
+      listItemElements.forEach((item) => {
+        expect(item.textContent).toMatch(/lo/i);
+      });
     });
   });
 
@@ -56,8 +58,9 @@ describe("SearchInput", () => {
       const inputElement = screen.getByPlaceholderText(
         "Write your intended location"
       );
-      fireEvent.change(inputElement, { target: { value: /lon/i } });
+      fireEvent.change(inputElement, { target: { value: "lon" } });
       fireEvent.click(searchButton);
+
       const spinnerElement = await screen.findByTestId("loading-spinner");
       expect(spinnerElement).toBeVisible();
     });

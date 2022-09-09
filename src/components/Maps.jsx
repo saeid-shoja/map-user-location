@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import style from "./styles/maps.module.css";
 import "leaflet/dist/leaflet.css";
@@ -10,7 +10,7 @@ const positionIcon = L.icon({
   iconSize: [30, 40],
 });
 
-const ResetMapCenter = ({ selectedLocation }) => {
+export const ResetLocationOnMap = ({ selectedLocation }) => {
   const map = useMap();
 
   useEffect(() => {
@@ -34,27 +34,31 @@ function Maps({ selectedLocation }) {
     +selectedLocation?.lon,
   ];
 
+  const markerRef = useRef();
+  console.log("markerRef :>> ", markerRef.current?._latlng);
+
   const position = [51.505, -0.09];
 
   return (
     <MapContainer
       className={style.mapContainer}
       center={[51.505, -0.09]}
-      zoom={130}
+      zoom={100}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=kkQgkyPmxq3ZkwAZICOv"
       />
       <Marker
+        ref={markerRef}
         position={selectedLocation.lat ? selectedLocationCoordinates : position}
         icon={positionIcon}
+        data-testid="marker-position"
       >
         <Popup>Here is a beautiful place</Popup>
       </Marker>
-
       {selectedLocation.lat && (
-        <ResetMapCenter selectedLocation={selectedLocation} />
+        <ResetLocationOnMap selectedLocation={selectedLocation} />
       )}
     </MapContainer>
   );
