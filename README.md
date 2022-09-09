@@ -1,10 +1,10 @@
 ### `About the map user location application`
-this application has two parts: 
-1- a search input that you can search your attended location by using osmtogeojson.
-2- a map that shows the location that you want on the map.
+This application has two parts: 
+1- A search input that you can search your attended location by using osmtogeojson.
+2- A map that shows the location that you want on the map.
 
 
-on the right side of the application, you can find a list of the locations that you searched. if you click on one of the locations on the list you can see your selected location on the map.
+On the right side of the application, you can find a list of the locations that you searched. if you click on one of the locations on the list you can see your selected location on the map.
 
 
 ### `npm start`
