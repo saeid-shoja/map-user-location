@@ -27,7 +27,6 @@ const SearchInput = ({ setSelectedLocation }) => {
     //  request param
     const params = {
       // q = <query>
-
       q: searchLocation,
       format: "json",
       detailAddress: 1,
