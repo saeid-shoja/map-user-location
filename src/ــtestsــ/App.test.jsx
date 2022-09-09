@@ -2,8 +2,8 @@ import { screen, render, fireEvent } from "@testing-library/react";
 import App from "../App";
 import "@testing-library/jest-dom";
 
-describe("SearchInput", () => {
-  it("should render input element", async () => {
+describe("should map location update", () => {
+  it("map should update after clicking on every item that is searched", async () => {
     render(<App />);
     const searchButton = screen.getByRole("button", { name: /search/i });
     const inputElement = screen.getByPlaceholderText(
